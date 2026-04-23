@@ -8,14 +8,14 @@
 // Return: n/a
 /**************************************************************/
   const firebaseConfig = {
-    apiKey: ,
-    authDomain: ,
-    databaseURL: ,
-    projectId: ,
-    storageBucket: ,
-    messagingSenderId:,
-    appId:
-  };
+  apiKey: "AIzaSyAxQlva_6hZjVVsaFBvxivSmG3gBwRUgys",
+  authDomain: "sonia-hassan-12comp.firebaseapp.com",
+  databaseURL: "https://sonia-hassan-12comp-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "sonia-hassan-12comp",
+  storageBucket: "sonia-hassan-12comp.firebasestorage.app",
+  messagingSenderId: "831579977355",
+  appId: "1:831579977355:web:df454d08b381a650b5868e"
+};
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
