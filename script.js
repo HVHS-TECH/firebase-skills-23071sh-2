@@ -37,7 +37,7 @@ function goodbyeWorld() {
 
 function simpleRead() {
   console.log("Reading message");
-  firebase.database().ref('/').child('message').once('value', displayRead);
+  firebase.database().ref('/').child('message').once('value', displayRead, fb_readError);
   console.log("Leaving simpleRead");
 }
 
