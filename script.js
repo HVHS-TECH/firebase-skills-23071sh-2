@@ -21,7 +21,7 @@ function helloWorld() {
   console.log("Running helloWorld()")
   firebase.database().ref('/').set(
     {
-      message: 'Kia Ora'
+      message: 'kia ora'
     }
   )
 }
@@ -60,3 +60,13 @@ function fb_readError(error){
   console.log("There was an error reading the message");
   console.error(error);
 }
+
+function fb_readListener(){
+  console.log("Read Listener");
+  firebase.database().ref('/message').on('value', displayRead,  fb_readError)
+}
+
+function createHighScores() {
+  console.log("Creating high score table"); 
+  
+  }
