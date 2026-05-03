@@ -68,5 +68,30 @@ function fb_readListener(){
 
 function createHighScores() {
   console.log("Creating high score table"); 
-  
+  highscoreTable = {
+    game1: {
+      users: {
+        Dhruv: 99999,
+        Jack: 10000,
+        Michael: 3223,
+        Sasha: 0.5,
+        Yug: 99889, 
+      }
+    },
+    game2: {
+      users: {
+        Dhruv: 13, 
+        Jack: 14,
+        Michael: 7,
+        Sasha: 3,
+        Yug: 12,
+      }
+    }
   }
+  firebase.database().ref('/').set(highscoreTable)
+  }
+
+function addScore(){
+  console.log("adding scores");
+  firebase.database().ref('/game1/users/Jenna').set(123432);
+}
