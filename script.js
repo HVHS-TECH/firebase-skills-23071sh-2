@@ -71,11 +71,11 @@ function createHighScores() {
   highscoreTable = {
     game1: {
       users: {
-        Dhruv: 99999,
-        Jack: 10000,
-        Michael: 3223,
+        Dhruv: 10,
+        Jack: 80,
+        Michael: 32,
         Sasha: 0.5,
-        Yug: 99889, 
+        Yug: 99, 
       }
     },
     game2: {
@@ -93,5 +93,10 @@ function createHighScores() {
 
 function addScore(){
   console.log("adding scores");
-  firebase.database().ref('/game1/users/Jenna').set(123432);
+  firebase.database().ref('/game1/users/Jenna').set(88);
+}
+
+function fb_readHighScore(){
+  console.log("Reading High score");
+  firebase.database().ref('/highScores/game1').once('value', displayRead, fb_readError)
 }
