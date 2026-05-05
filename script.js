@@ -98,5 +98,11 @@ function addScore(){
 
 function fb_readHighScore(){
   console.log("Reading High score");
-  firebase.database().ref('/highScores/game1').once('value', displayRead, fb_readError)
+  firebase.database().ref('/game1').once('value', fb_displayHighScores, fb_readError)
 }
+function fb_displayHighScores(snapshot){
+  let highScore = snapshot.val()
+  console.log( "Dhruv got" +highScore.users ["Dhruv"] +" points")
+}
+
+
