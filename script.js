@@ -66,67 +66,75 @@ function fb_readListener(){
   firebase.database().ref('/message').on('value', displayRead,  fb_readError)
 }
 
+
 function createHighScores() {
   console.log("Creating high score table"); 
   highscoreTable = {
     game1: {
       users: {
-        Dhruv: 10,
-        Jack: 80,
-        Michael: 32,
-        Sasha: 0.5,
-        Yug: 99, 
+        Mishall: 40,
+        Paige: 80,
+        Amira: 70,
+        Raya: 100,
+        Iqra: 130, 
       }
     },
     game2: {
       users: {
-        Dhruv: 13, 
-        Jack: 14,
-        Michael: 7,
-        Sasha: 3,
-        Yug: 12,
+        Mishall: 10, 
+        Paige: 20,
+        Amira: 30,
+        Raya: 40,
+        Iqra: 50,
       }
     }
   }
   firebase.database().ref('/').set(highscoreTable)
   }
 
+//Adding scores 
 function addScore(){
   console.log("adding scores");
-  firebase.database().ref('/game1/users/Jenna').set(88);
+  firebase.database().ref('/game1/users/Sonia').set(80);
 }
 
+//Read one highscore 
 function fb_readHighScore(){
   console.log("Reading High score");
   firebase.database().ref('/game1').once('value', fb_displayHighScores, fb_readError)
 }
 
+//Display one highscore
 function fb_displayHighScores(snapshot){
   let highScore = snapshot.val()
-  console.log( "Dhruv got" + highScore.users ["Dhruv"] +" points")
+  console.log( "Mishall got" + highScore.users ["Mishall"] +" points")
 }
 
+//Adding all the scores 
 function fb_readAllScores(){
   console.log("Reading all scores");
   firebase.database().ref('/game1').once('value', fb_displayAllScores, fb_readError)
 }
 
-function fb_outputAllScores(){
-  console.log("Reading scores")
-  firebase.database().ref('/message').once('value',display); 
-  console.log("leaving fb_outputAllScores ")
-}
-
+//Display all the scores
 function fb_displayAllScores(snapshot){
   let highScores = snapshot.val().users;
 
   let names = Object.keys(highScores);
   console.log(names);
 
+  let message = "";
   for(let i = 0; i < names.length; i++){
     let key = names[i];
-    console.log("Score "+i+" is for "+ key +" . "+highScores[key] + " points")
+    message += "Score " + i + " is for " + key + ". "
+            + highScores[key] + " points <br>";
+    console.log("Score "+i+" is for "+ key +" . "+highScores[key] + " points");
   }
+  HTML_OUTPUT.innerHTML = message;
+}
 
-   HTML_OUTPUT.innerHTML = snapshot.val().users;
+//Sorting the highscore data
+function fb_sortHighScores(){
+  console.log("Sorting data")
+  firebase.database().ref('/game1') .orderByValue() .once('value' , fb_displayAllScores, fb_readError)
 }
