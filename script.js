@@ -98,18 +98,6 @@ function addScore(){
   firebase.database().ref('/game1/users/Sonia').set(80);
 }
 
-//Read one highscore 
-function fb_readHighScore(){
-  console.log("Reading High score");
-  firebase.database().ref('/game1').once('value', fb_displayHighScores, fb_readError)
-}
-
-//Display one highscore
-function fb_displayHighScores(snapshot){
-  let highScore = snapshot.val()
-  console.log( "Mishall got" + highScore.users ["Mishall"] +" points")
-}
-
 //Adding all the scores 
 function fb_readAllScores(){
   console.log("Reading all scores");
@@ -134,7 +122,16 @@ function fb_displayAllScores(snapshot){
 }
 
 //Sorting the highscore data
-function fb_sortHighScores(){
-  console.log("Sorting data")
-  firebase.database().ref('/game1') .orderByValue() .once('value' , fb_displayAllScores, fb_readError)
+function fb_sortScores(){
+  firebase.database().ref('/game1/users') .orderByChild("score") .once('value', fb_sortHighScores, fb_readError)
+}
+
+function fb_sortHighScores(snapshot){
+  snapshot.forEach(fb_showOnceScore)
+  console.log("the message is:" + snapshot.val())
+  HTML_OUTPUT.innerHTML = snapshot.val();
+}
+
+function fb_showOnceScore(child){
+  console.log(child.key+" got "+ child.val()+" points");
 }
