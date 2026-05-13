@@ -107,18 +107,14 @@ function fb_readAllScores(){
 //Display all the scores
 function fb_displayAllScores(snapshot){
   let highScores = snapshot.val().users;
-
   let names = Object.keys(highScores);
   console.log(names);
-
-  let message = "";
-  for(let i = 0; i < names.length; i++){
+  HTML_OUTPUT.innerHTML = "";
+  for(i = 0; i < names.length; i++){
     let key = names[i];
-    message += "Score " + i + " is for " + key + ". "
-            + highScores[key] + " points <br>";
-    console.log("Score "+i+" is for "+ key +" . "+highScores[key] + " points");
+    console.log("Score "+i+" is for "+ highScores[key] + " points");
+    HTML_OUTPUT.innerHTML += "Score " + i + " is for " + highScores[key] + " points<br>";
   }
-  HTML_OUTPUT.innerHTML = message;
 }
 
 //Sorting the highscore data
@@ -127,10 +123,12 @@ function fb_sortScores(){
 }
 
 function fb_sortHighScores(snapshot){
-  snapshot.forEach(fb_showOnceScore)
-  HTML_OUTPUT.innerHTML = snapshot.val();
+  HTML_OUTPUT.innerHTML = "";
+  snapshot.forEach(function(child){
+    console.log(child.key + " got " + child.val() + " points");
+    HTML_OUTPUT.innerHTML += child.key + " : " + child.val();
+  });
 }
-
 function fb_showOnceScore(child){
   console.log(child.key+" got "+ child.val()+" points");
 }
