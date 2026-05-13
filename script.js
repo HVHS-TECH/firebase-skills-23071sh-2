@@ -128,7 +128,6 @@ function fb_sortScores(){
 
 function fb_sortHighScores(snapshot){
   snapshot.forEach(fb_showOnceScore)
-  console.log("the message is:" + snapshot.val())
   HTML_OUTPUT.innerHTML = snapshot.val();
 }
 
